@@ -4,7 +4,7 @@
 [OpenAI API](https://openai.com/api/)
 
 - LangChain with Google AI
-``````command
+``````commandline
 pip install langchain-google-genai
 ``````
 
@@ -19,3 +19,15 @@ pip install python-dotenv
 [LangChain Integration Chat](https://docs.langchain.com/oss/python/integrations/chat)
 
 [Gemini Models](https://ai.google.dev/gemini-api/docs/models)
+
+````
+pip install langchain langchain-core
+````
+
+
+Gradio Library
+[Gradio](https://pypi.org/project/gradio/)
+
+```commandline
+pip install gradio
+```
