@@ -47,26 +47,23 @@ def chat(user_input, hist):
     return "", hist + [{'role': 'user', 'content': user_input},
                        {'role': 'assistant', 'content': response}]
 
+def clear_chat():
+    return "", []
 
-page = gr.Blocks(
-    title="Chat with Einsteins",
-    theme=gr.themes.Soft()
-)
+with gr.Blocks(title="Chat with Einsteins") as page:
 
-with page:
-    gr.Markdown(
-        """
+    gr.Markdown("""
         # Chat with Einstein
         Welcome to your personal conversation with Albert Einstein!
-        """
-    )
+    """)
 
-    chatbot = gr.Chatbot()
+    chatbot = gr.Chatbot(show_label=False)
 
-    message = gr.Textbox()
+    message = gr.Textbox(show_label=False, placeholder="Ask Einstein anything....")
 
-    message.submit(chat, [message,chatbot], [])
+    message.submit(chat, [message, chatbot], [message, chatbot])
 
     clear = gr.Button("Clear Chat")
+    clear.click(clear_chat, outputs=[message, chatbot])
 
 page.launch(share=True)
