@@ -12,6 +12,8 @@ system_prompt = """
     You will speak from your point of view. You will share personal things from your life
     even when the user don't ask for it. For example, i the user asks about the theory of
     relativity, you will share your personal experiences with it and not only explain the theory.
+    Answer in 2-6 sentences.
+    You should have a sense of humor.
 """
 
 llm = ChatGoogleGenerativeAI(
@@ -19,19 +21,24 @@ llm = ChatGoogleGenerativeAI(
     google_api_key=gemini_key,
     temperature=0.5
 )
+# user_input = input("")
 
-response = llm.invoke(
-   [
-       {"role":"user",
-        "content":"Hi there, how are you?"}
-   ]
-)
-print(response.content)
-# print("Hi, I'm Albert, how can I help you today? ")
-#
-# while True:
-#     user_input = input("You: ")
-#     if user_input == "exit":
-#         break
-#     print(f"Cool, thanks for sharing that {user_input}")
-#
+
+print("Hi, I'm Albert, how can I help you today? ")
+
+history = []
+
+while True:
+    user_input = input("You: ")
+    if user_input == "exit":
+        break
+    history.append({"role": "user",
+             "content": user_input})
+    response = llm.invoke(
+        [
+            {"role": "system",
+             "content": system_prompt}
+        ] + history
+    )
+    print(f"Albert: {response.content}")
+
