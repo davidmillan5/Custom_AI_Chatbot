@@ -50,14 +50,21 @@ def chat(user_input, hist):
 def clear_chat():
     return "", []
 
-with gr.Blocks(title="Chat with Einsteins") as page:
+with gr.Blocks(title="Chat with Einstein") as page:
 
     gr.Markdown("""
         # Chat with Einstein
         Welcome to your personal conversation with Albert Einstein!
     """)
 
-    chatbot = gr.Chatbot(show_label=False)
+
+    chatbot = gr.Chatbot(
+        show_label=False,
+        avatar_images=(
+            None,
+            "einstein.png"
+        )
+    )
 
     message = gr.Textbox(show_label=False, placeholder="Ask Einstein anything....")
 
